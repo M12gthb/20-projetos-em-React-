@@ -1,10 +1,18 @@
 import React from "react";
 
-function LapList() {
+function LapList({ laps }) {
   return (
     <div className="timer-laps">
       <h3>Voltas:</h3>
-      <ul></ul>
+      <ul>
+        {laps.map((lap, index) => {
+          return (
+            <li key={index}>
+              Volta {index + 1}: {lap}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
