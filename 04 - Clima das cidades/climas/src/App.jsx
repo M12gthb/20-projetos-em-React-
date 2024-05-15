@@ -12,6 +12,24 @@ function App() {
 
   const apiKey = import.meta.env.VITE_API_KEY || "";
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const resposta = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`
+      );
+
+      const respostaPrevisão = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`
+      );
+      setCidade(resposta.data.name);
+      setClima(resposta.data);
+      setPrevisão(respostaPrevisão.data.list.slice(0, 5));
+    });
+  }, [apiKey]);
+
   const buscarClima = async () => {
     try {
       const respostaClima = await axios.get(
