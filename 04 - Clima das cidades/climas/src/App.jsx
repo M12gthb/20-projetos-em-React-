@@ -1,9 +1,9 @@
 import Busca from "./components/Busca";
 import ClimaAtual from "./components/ClimaAtual";
 import Previsão from "./components/Previsão";
-import { Título } from "./AppStyles";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { ClimaContainer, Titulo } from "./AppStyles";
 
 function App() {
   const [cidade, setCidade] = useState("");
@@ -46,12 +46,12 @@ function App() {
   };
 
   return (
-    <>
-      <Título>Condições Climáticas</Título>
+    <ClimaContainer>
+      <Titulo>Condições Climáticas</Titulo>
       <Busca cidade={cidade} setCidade={setCidade} buscarClima={buscarClima} />
       {clima && <ClimaAtual clima={clima} />}
       {previsão.length > 0 && <Previsão previsões={previsão} />}
-    </>
+    </ClimaContainer>
   );
 }
 
