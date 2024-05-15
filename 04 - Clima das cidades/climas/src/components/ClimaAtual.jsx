@@ -1,12 +1,15 @@
 import React from "react";
 
-function ClimaAtual() {
+function ClimaAtual({ clima }) {
   return (
     <div>
-      <h3>Nome</h3>
-      <img src="" alt="" />
-      <p>ºC</p>
-      <p>Descrição da temperatura</p>
+      <h3>{clima.name}</h3>
+      <img
+        src={`http://openweathermap.org/img/wn/${clima.weather[0].icon}.png`}
+        alt={clima?.weather[0]}
+      />
+      <p>{clima.main.temp}ºC</p>
+      <p>{clima.weather[0].description}</p>
     </div>
   );
 }
