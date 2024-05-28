@@ -1,17 +1,26 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toogleTodo, removeTodo } from "../slices/todoSlice";
+import { toogleTodo, removeTodo, filterTodo } from "../slices/todoSlice";
 
 function TodoList() {
   const { list, filter } = useSelector((state) => state.todos);
   const dispatch = useDispatch();
+  const filteredList = list.filter((todo) => {
+    if (filter === "all") return true;
+    if (filter === "completed") return todo.completed;
+    if (filter === "incomplete") return !todo.completed;
+  });
   return (
     <div>
-      <button>Todas</button>
-      <button>Completas</button>
-      <button>Incompletas</button>
+      <button onClick={() => dispatch(filterTodo("all"))}>Todas</button>
+      <button onClick={() => dispatch(filterTodo("completed"))}>
+        Completas
+      </button>
+      <button onClick={() => dispatch(filterTodo("incomplete"))}>
+        Incompletas
+      </button>
       <ul>
-        {list.map((todo) => (
+        {filteredList.map((todo) => (
           <li key={todo.id}>
             <span
               onClick={() => dispatch(toogleTodo(todo.id))}
