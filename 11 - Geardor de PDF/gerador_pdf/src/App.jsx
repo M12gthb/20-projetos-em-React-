@@ -1,12 +1,11 @@
-import { useState } from "react";
-import "./App.css";
-import GeneratePdf from "./components/generatePdf";
+import React from "react";
+import GeneratePDF from "./components/GeneratePDF";
 
 function App() {
   return (
     <div className="App">
-      <h1>Gerador de PDF</h1>
-      <GeneratePdf />
+      <h1>Gerador de PDF Dinâmico</h1>
+      <GeneratePDF />
     </div>
   );
 }
